@@ -66,7 +66,7 @@ namespace InstagroomEX.ViewModels
                     await NavigationService.NavigateAsync("/NavigationPage/MasterTabbedPageView");
                 }
             }
-            //проверкаfffffffffffffffff
+            //проверкаfffffffffffffffffdfgjghjkl
 
             //var user = await _userDataService.GetUserByUsernameAsync(Username); только по ID
             // CurrentUser -> mastertabbedpage
