@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstagroomEX", "InstagroomEX\InstagroomEX\InstagroomEX.csproj", "{EF369C74-0F2C-482F-9EB4-2962125FCC10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstagroomEX.Android", "InstagroomEX\InstagroomEX.Android\InstagroomEX.Android.csproj", "{F2E804E8-6C6E-49BA-A38E-8F4C3E071489}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EF369C74-0F2C-482F-9EB4-2962125FCC10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF369C74-0F2C-482F-9EB4-2962125FCC10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF369C74-0F2C-482F-9EB4-2962125FCC10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF369C74-0F2C-482F-9EB4-2962125FCC10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2E804E8-6C6E-49BA-A38E-8F4C3E071489}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2E804E8-6C6E-49BA-A38E-8F4C3E071489}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2E804E8-6C6E-49BA-A38E-8F4C3E071489}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F2E804E8-6C6E-49BA-A38E-8F4C3E071489}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2E804E8-6C6E-49BA-A38E-8F4C3E071489}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2E804E8-6C6E-49BA-A38E-8F4C3E071489}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4478FD11-7BD1-41DA-BCD0-07194AC07980}
+	EndGlobalSection
+EndGlobal

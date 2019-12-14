@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="InstagroomEX.Views.RegistrationView"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackLayout
+            Margin="0,20,0,0"
+            Orientation="Vertical"
+            HorizontalOptions="Fill"
+            Grid.Row="0">
+            <Entry x:Name="Username" 
+                   Placeholder="Username"
+                   Text="{Binding Username, Mode=TwoWay}"/>
+            <Entry x:Name="FirstName"
+                   Placeholder="First name"
+                   Text="{Binding FirstName, Mode=TwoWay}"/>
+            <Entry x:Name="LastName" 
+                   Placeholder="Last name"
+                   Text="{Binding LastName, Mode=TwoWay}"/>
+            <Entry x:Name="Email" 
+                   Placeholder="Email"
+                   Text="{Binding Email, Mode=TwoWay}"/>
+            <Entry x:Name="Password" 
+                   IsPassword="True"
+                   Placeholder="Password"
+                   Text="{Binding Password, Mode=TwoWay}"/>
+            <Entry x:Name="RepeatPassword" 
+                   IsPassword="True"
+                   Placeholder="Repeat password"
+                   Text="{Binding RepeatPassword, Mode=TwoWay}"/>
+        </StackLayout>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Text="Sign up"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    HeightRequest="80"
+                    CornerRadius="12"
+                    Margin="40,40,40,0"
+                    HorizontalOptions="FillAndExpand"
+                    Command="{Binding ToLoginPageAfterRegistration}">
+
+            </Button>
+
+            <Label Text="Have an account?"
+                   Grid.Row="1"
+                   Grid.Column="0"
+                   FontSize="20"
+                   VerticalOptions="Start"
+                   HorizontalOptions="Center"
+                   Margin="0,20,0,0">
+                
+            </Label>
+
+            <Button Text="Log in"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="0,16,16,0"
+                    Command="{Binding ToLoginPage}">
+                
+            </Button>
+            
+        </Grid>
+        
+        
+        
+    </Grid>
+</ContentPage>
