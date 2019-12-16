@@ -24,5 +24,8 @@ namespace InstagroomEX.Model
 
         [MaxLength(255)]
         public string Email { get; set; }
+        
+        [MaxLength(255)]
+        public string GoogleName { get; set; }
     }
 }
