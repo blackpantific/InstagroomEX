@@ -44,6 +44,12 @@ namespace InstagroomEX.Services
             }
             
         }
+
+        public async Task<User> GetUserByGoogleIDAsync(string googleId)
+        {
+            return await _dbConnection.GetAsync<User>(u => (u.GoogleID == googleId));
+        }
+
         public UserDataService(ISQLiteConnectionService connectionService)
         {
             _dbConnection = connectionService.GetConnection();

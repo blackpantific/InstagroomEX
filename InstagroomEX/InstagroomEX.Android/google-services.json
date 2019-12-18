@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "674374288476",
+    "firebase_url": "https://instagroomex.firebaseio.com",
+    "project_id": "instagroomex",
+    "storage_bucket": "instagroomex.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:674374288476:android:3335a1884c63a1cdb8d299",
+        "android_client_info": {
+          "package_name": "com.companyname.appname"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "674374288476-paqqdnstn17dii7n81okj06l0r417vgv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.companyname.appname",
+            "certificate_hash": "ccc2ca4f73fc1e80258c45cc6d6d5c2b0eec43be"
+          }
+        },
+        {
+          "client_id": "674374288476-pgdu27l4roud5hog0gqk0ig8urn21244.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDJUv5mETKrRgLaHX2gqmbuRMXiATI_u0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "674374288476-pgdu27l4roud5hog0gqk0ig8urn21244.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

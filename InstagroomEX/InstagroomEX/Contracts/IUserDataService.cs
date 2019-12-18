@@ -13,5 +13,6 @@ namespace InstagroomEX.Contracts
         Task<User> GetUserByUsernameAsync(string username);
         Task<User> GetUserByIDAsync(int userId);
         Task<bool> AddUserAsync(User newUser);
+        Task<User> GetUserByGoogleIDAsync(string googleId);
     }
 }

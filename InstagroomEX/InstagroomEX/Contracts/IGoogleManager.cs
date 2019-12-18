@@ -9,5 +9,6 @@ namespace InstagroomEX.Contracts
     {
         void Login(Action<User, string> OnLoginComplete);
         void Logout();
+        void OnAuthCompleted(object result);
     }
 }
