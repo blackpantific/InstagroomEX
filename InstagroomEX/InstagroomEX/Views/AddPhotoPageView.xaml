@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:converters="clr-namespace:InstagroomEX.Converters"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="InstagroomEX.Views.AddPhotoPageView"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="Blue"
+             Title="Photo">
+    <!--В случае ненадобности удалить свойство HasNavigationBar-->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ImageSourcePathConverter x:Key="ImageSourcePathConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Editor Placeholder="Add a description"
+                MaxLength="150"
+                Text="{Binding UserDescription, Mode=TwoWay}"
+                AutoSize="TextChanges"
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="2">
+        </Editor>
+
+
+        <Button Text="Take a photo"
+                Command="{Binding TakePhoto}"
+                Grid.Column="0"
+                Grid.Row="1"/>
+        <Button Text="Open a gallery"
+                Command="{Binding OpenGallery}"
+                Grid.Column="1"
+                Grid.Row="1"/>
+
+        <Button Text="POST"
+                Command="{Binding TakePhoto}"
+                Grid.Row="3"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                VerticalOptions="End"/>
+
+        <ff:CachedImage             
+            Aspect="AspectFit"
+            BackgroundColor="Red"
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            Source="{Binding PreviewImagePath, 
+            Mode=OneWay, 
+            Converter={StaticResource ImageSourcePathConverter}}"
+            >
+        </ff:CachedImage>
+        <!--<Image Aspect="AspectFill"
+               Grid.Row="2"
+               Grid.ColumnSpan="2"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Source="{Binding PreviewImagePath, Mode=OneWay}"
+            ></Image>-->
+
+    </Grid>
+</ContentPage>

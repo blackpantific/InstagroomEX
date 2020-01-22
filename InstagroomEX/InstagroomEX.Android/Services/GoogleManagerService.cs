@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.Gms.Auth.Api;
@@ -50,7 +49,7 @@ namespace InstagroomEX.Droid.Services
                 _onLoginComplete?.Invoke(new User
                 {
                     GoogleID = account.Id,
-                    Username = string.Empty,
+                    Username = account.Email,
                     FirstName = account.GivenName,
                     LastName = account.FamilyName,
                     Email = account.Email,

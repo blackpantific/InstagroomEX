@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:ffTransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="InstagroomEX.Views.AccountPageView"
+             NavigationPage.HasNavigationBar="True"
+             BackgroundColor="Turquoise"
+             Title="User">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Log out"
+                     Command="{Binding LogOutCommand}"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <!--В случае ненадобности удалить свойство HasNavigationBar-->
+  
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.4*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" BackgroundColor="ForestGreen">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <ff:CachedImage Grid.Row="0"
+                            Grid.RowSpan="4"
+                            Grid.Column="0"
+                            HeightRequest="120"
+                            WidthRequest="120"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Aspect="AspectFill"
+                            Margin="8,8,0,8"
+                            Source="Huayra3.jpg"
+                            >
+                <ff:CachedImage.Transformations>
+                    <ffTransformations:RoundedTransformation Radius="400"/>
+                </ff:CachedImage.Transformations>
+            </ff:CachedImage>
+            
+
+
+
+            <Label Grid.Row="0"
+                   Grid.Column="1"
+                   Text="{Binding FullName, Mode=OneWay}"
+                   LineBreakMode="TailTruncation"
+                   FontSize="20"/>
+            <Label Grid.Row="1"
+                   Grid.Column="1"
+                   Text="{Binding Username, Mode=OneWay}"
+                   LineBreakMode="TailTruncation"
+                   FontSize="16"/>
+
+            <Button Text="Edit profile"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Command="{Binding EditProfileCommand}"/>
+
+            <Grid Grid.Row="2"
+                  Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       Text="Posts"
+                       FontSize="12"
+                       HorizontalTextAlignment="Center"/>
+                <Label Grid.Row="0"
+                       Grid.Column="1"
+                       Text="Followers"
+                       FontSize="12"
+                       HorizontalTextAlignment="Center"/>
+                <Label Grid.Row="0"
+                       Grid.Column="2"
+                       Text="Following"
+                       FontSize="12"
+                       HorizontalTextAlignment="Center"/>
+
+                <Label Grid.Row="1"
+                       Grid.Column="0"
+                       Text="0"
+                       FontSize="12"
+                       HorizontalTextAlignment="Center"/>
+                <Label Grid.Row="1"
+                       Grid.Column="1"
+                       Text="0"
+                       FontSize="12"
+                       HorizontalTextAlignment="Center"/>
+                <Label Grid.Row="1"
+                       Grid.Column="2"
+                       Text="0"
+                       FontSize="12"
+                       HorizontalTextAlignment="Center"/>
+            </Grid>
+        </Grid>
+
+
+        <Label Text="You haven't posted anything yet"
+               Grid.Row="1"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               IsVisible="True"/>
+        
+
+    </Grid>
+</ContentPage>
