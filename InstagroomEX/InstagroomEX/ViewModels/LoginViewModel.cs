@@ -1,6 +1,7 @@
 ﻿using Acr.UserDialogs;
 using InstagroomEX.Contracts;
 using InstagroomEX.Helpers;
+using InstagroomEX.Mapper;
 using InstagroomEX.Model;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -97,7 +98,7 @@ namespace InstagroomEX.ViewModels
                 googleUser = await _userDataService.GetUserByGoogleIDAsync(googleUser.GoogleID);
 
 
-                _userDataService.CurrentUser = googleUser;
+                _userDataService.CurrentUser = googleUser.ToUserDto();
                 SettingsHelper.UserId = googleUser.ID;
 
                 UserDialogs.Instance.Toast(_validationService.RemarkRegistrationCompletedSuccessfully);
