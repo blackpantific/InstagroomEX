@@ -32,6 +32,7 @@ namespace InstagroomEX
         {
             containerRegistry.RegisterSingleton<IValidationService, ValidationService>();
             containerRegistry.RegisterSingleton<IUserDataService, UserDataService>();
+            containerRegistry.RegisterSingleton<IWorkWithPhotoService, WorkWithPhotoService>();
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<WelcomeView, WelcomeViewModel>();
@@ -39,6 +40,13 @@ namespace InstagroomEX
             containerRegistry.RegisterForNavigation<LoginView, LoginViewModel>();
             containerRegistry.RegisterForNavigation<MasterTabbedPageView, MasterTabbedPageViewModel>();
 
+            containerRegistry.RegisterForNavigation<HomePageView, HomePageViewModel>();
+            containerRegistry.RegisterForNavigation<SearchPageView, SearchPageViewModel>();
+            containerRegistry.RegisterForNavigation<AddPhotoPageView, AddPhotoPageViewModel>();
+            containerRegistry.RegisterForNavigation<AddPhotoPageView, AddPhotoPageViewModel>();
+            containerRegistry.RegisterForNavigation<NotificationPageView, NotificationPageViewModel>();
+            containerRegistry.RegisterForNavigation<AccountPageView, AccountPageViewModel>();
+            containerRegistry.RegisterForNavigation<EditProfileView, EditProfileViewModel>();
         }
     }
 }

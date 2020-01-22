@@ -1,6 +1,7 @@
 ﻿using Acr.UserDialogs;
 using InstagroomEX.Contracts;
 using InstagroomEX.Helpers;
+using InstagroomEX.Model;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -13,6 +14,8 @@ namespace InstagroomEX.ViewModels
     public class LoginViewModel : ViewModelBase
     {
         private readonly IUserDataService _userDataService;
+        private readonly IGoogleManager _googleManager;
+        private readonly IValidationService _validationService;
 
         private string _username;
         private string _password;
@@ -83,14 +86,37 @@ namespace InstagroomEX.ViewModels
         }
         void ExecuteLogInViaGoogle()
         {
-
+            _googleManager.Login(OnLoginComplete);
         }
-        
 
-        public LoginViewModel(INavigationService navigationService, IUserDataService userDataService) :
+        private async void OnLoginComplete(User googleUser, string message)
+        {
+            if(googleUser != null)
+            {
+                await _userDataService.AddUserAsync(googleUser);
+                googleUser = await _userDataService.GetUserByGoogleIDAsync(googleUser.GoogleID);
+
+
+                _userDataService.CurrentUser = googleUser;
+                SettingsHelper.UserId = googleUser.ID;
+
+                UserDialogs.Instance.Toast(_validationService.RemarkRegistrationCompletedSuccessfully);
+
+                await NavigationService.NavigateAsync("/NavigationPage/MasterTabbedPageView");
+            }
+            else
+            {
+                await UserDialogs.Instance.AlertAsync(message, "Warning", "OK");
+            }
+        }
+
+        public LoginViewModel(INavigationService navigationService, IUserDataService userDataService, 
+            IGoogleManager googleManager, IValidationService validationService) :
             base(navigationService)
         {
             _userDataService = userDataService;
+            _googleManager = googleManager;
+            _validationService = validationService;
         }
     }
 }

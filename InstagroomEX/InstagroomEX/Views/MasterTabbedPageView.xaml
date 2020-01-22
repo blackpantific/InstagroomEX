@@ -3,10 +3,31 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:prism="http://prismlibrary.com"
             prism:ViewModelLocator.AutowireViewModel="True"
-            x:Class="InstagroomEX.Views.MasterTabbedPageView">
-    <TabbedPage.Children>
-        <Page Title="Page1"/>
-        <Page Title="Page2"/>
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            xmlns:InstagroomPages="clr-namespace:InstagroomEX.Views"
+            x:Class="InstagroomEX.Views.MasterTabbedPageView"
+            NavigationPage.HasNavigationBar="False">
 
+    <TabbedPage.Children>
+        <!--<Page Title="Home"/>
+        <Page Title="Search"/>
+        <Page Title="Add photo"/>
+        <Page Title="Notifications"/>
+        <ContentPage Title="Account">           
+        </ContentPage>-->
+        <InstagroomPages:HomePageView/>
+        <InstagroomPages:SearchPageView/>
+        <InstagroomPages:AddPhotoPageView/>
+        <InstagroomPages:NotificationPageView/>
+
+        <NavigationPage Title="Account">
+            <x:Arguments>
+                <InstagroomPages:AccountPageView/>
+            </x:Arguments>
+        </NavigationPage>
+
+        
+        
     </TabbedPage.Children>
 </TabbedPage>

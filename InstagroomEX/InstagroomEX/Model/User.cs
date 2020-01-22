@@ -11,6 +11,9 @@ namespace InstagroomEX.Model
         public int ID { get; set; }
 
         [MaxLength(255)]
+        public string GoogleID { get; set; }
+
+        [MaxLength(255)]
         public string Username { get; set; }
 
         [MaxLength(255)]
@@ -24,5 +27,8 @@ namespace InstagroomEX.Model
 
         [MaxLength(255)]
         public string Email { get; set; }
+
+        [MaxLength(255)]
+        public string UserAvatar { get; set; }
     }
 }

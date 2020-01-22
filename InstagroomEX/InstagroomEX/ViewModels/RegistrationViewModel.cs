@@ -104,6 +104,7 @@ namespace InstagroomEX.ViewModels
                             Username = this.Username,
                             FirstName = this.FirstName,
                             LastName = this.LastName,
+                            GoogleID = string.Empty,
                             Email = this.Email,
                             Password = this.Password
                         };

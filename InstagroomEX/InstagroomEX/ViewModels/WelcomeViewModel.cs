@@ -48,15 +48,15 @@ namespace InstagroomEX.ViewModels
             _userDataService = userDataService;
         }
 
-        public override async void Initialize(INavigationParameters parameters)
+        public async override void Initialize(INavigationParameters parameters)
         {
             base.Initialize(parameters);
 
             var savedUserId = SettingsHelper.UserId;
-            if(savedUserId != -1)
+            if (savedUserId != -1)
             {
                 var currentUser = await _userDataService.GetUserByIDAsync(savedUserId);
-                if(currentUser == null)
+                if (currentUser == null)
                 {
                     //Error
                 }
@@ -66,7 +66,7 @@ namespace InstagroomEX.ViewModels
                     await NavigationService.NavigateAsync("/NavigationPage/MasterTabbedPageView");
                 }
             }
-            //проверка
+            //проверкаfffffffffffffffffdfgjghjkl
 
             //var user = await _userDataService.GetUserByUsernameAsync(Username); только по ID
             // CurrentUser -> mastertabbedpage

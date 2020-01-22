@@ -10,7 +10,7 @@ namespace InstagroomEX.ViewModels
     {
         public MasterTabbedPageViewModel()
         {
-
+            ///comment
         }
     }
 }
