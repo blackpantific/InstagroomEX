@@ -16,45 +16,52 @@ namespace InstagroomEX.ViewModels
         private readonly IValidationService _validationService;
         private readonly IUserDataService _userDataService;
 
-        private string _username;
-        private string _repeatPassword;
-        private string _password;
-        private string _email;
-        private string _lastName;
-        private string _firstName;
+        private UserDto _currentUser;
+        public UserDto CurrentUser
+        {
+            get { return _currentUser; }
+            set { SetProperty(ref _currentUser, value); }
+        }
 
-        #region Bindable properties
+        //private string _username;
+        private string _repeatPassword;
+        //private string _password;
+        //private string _email;
+        //private string _lastName;
+        //private string _firstName;
+
+        //#region Bindable properties
         public string RepeatPassword
         {
             get { return _repeatPassword; }
             set { SetProperty(ref _repeatPassword, value); }
         }
-        public string Password
-        {
-            get { return _password; }
-            set { SetProperty(ref _password, value); }
-        }
-        public string Email
-        {
-            get { return _email; }
-            set { SetProperty(ref _email, value); }
-        }
-        public string LastName
-        {
-            get { return _lastName; }
-            set { SetProperty(ref _lastName, value); }
-        }
-        public string FirstName
-        {
-            get { return _firstName; }
-            set { SetProperty(ref _firstName, value); }
-        }
-        public string Username
-        {
-            get { return _username; }
-            set { SetProperty(ref _username, value); }
-        }
-        #endregion
+        //public string Password
+        //{
+        //    get { return _password; }
+        //    set { SetProperty(ref _password, value); }
+        //}
+        //public string Email
+        //{
+        //    get { return _email; }
+        //    set { SetProperty(ref _email, value); }
+        //}
+        //public string LastName
+        //{
+        //    get { return _lastName; }
+        //    set { SetProperty(ref _lastName, value); }
+        //}
+        //public string FirstName
+        //{
+        //    get { return _firstName; }
+        //    set { SetProperty(ref _firstName, value); }
+        //}
+        //public string Username
+        //{
+        //    get { return _username; }
+        //    set { SetProperty(ref _username, value); }
+        //}
+        //#endregion
 
         private DelegateCommand _toLoginPageAfterRegistration;
         private DelegateCommand _toLoginPage;
@@ -65,13 +72,13 @@ namespace InstagroomEX.ViewModels
 
         async void ExecuteTologinPageAfterRegistration()
         {
-            if (String.IsNullOrWhiteSpace(Username))
+            if (String.IsNullOrWhiteSpace(CurrentUser.Username))
             {
                 UserDialogs.Instance.Toast(_validationService.RemarkToUsername);
                 return;
             }
 
-            var userProfile = await _userDataService.GetUserByUsernameAsync(Username);
+            var userProfile = await _userDataService.GetUserByUsernameAsync(CurrentUser.Username);
 
             if (userProfile != null)
             {
@@ -79,37 +86,37 @@ namespace InstagroomEX.ViewModels
                 return;
             }
 
-            if (String.IsNullOrWhiteSpace(FirstName))
+            if (String.IsNullOrWhiteSpace(CurrentUser.FirstName))
             {
                 UserDialogs.Instance.Toast(_validationService.RemarkFirstName);
                 return;
             }
-            else if (String.IsNullOrWhiteSpace(LastName))
+            else if (String.IsNullOrWhiteSpace(CurrentUser.LastName))
             {
                 UserDialogs.Instance.Toast(_validationService.RemarkLastName);
                 return;
             }
-            else if (String.IsNullOrWhiteSpace(Email) || _validationService.ValidateEmail(Email))
+            else if (String.IsNullOrWhiteSpace(CurrentUser.Email) || _validationService.ValidateEmail(CurrentUser.Email))
             {
                 UserDialogs.Instance.Toast(_validationService.RemarkEmailName);
                 return;
             }
 
-            switch (_validationService.ValidatePassword(Password, RepeatPassword))
+            switch (_validationService.ValidatePassword(CurrentUser.Password, RepeatPassword))
             {
                 case PasswordValidationEnum.Ok:
                     {
-                        var newUserProfile = new User()
-                        {
-                            Username = this.Username,
-                            FirstName = this.FirstName,
-                            LastName = this.LastName,
-                            GoogleID = string.Empty,
-                            Email = this.Email,
-                            Password = this.Password
-                        };
+                        //var newUserProfile = new User()
+                        //{
+                        //    Username = this.Username,
+                        //    FirstName = this.FirstName,
+                        //    LastName = this.LastName,
+                        //    GoogleID = string.Empty,
+                        //    Email = this.Email,
+                        //    Password = this.Password
+                        //};
 
-                        await _userDataService.AddUserAsync(newUserProfile);
+                        await _userDataService.AddUserAsync(CurrentUser);
                         UserDialogs.Instance.Toast(_validationService.RemarkRegistrationCompletedSuccessfully);
 
                         await NavigationService.NavigateAsync("/NavigationPage/WelcomeView/LoginView");
@@ -118,7 +125,7 @@ namespace InstagroomEX.ViewModels
                 case PasswordValidationEnum.TooShort:
                     {
                         UserDialogs.Instance.Toast(_validationService.RemarkPasswordLenght);
-                        Password = string.Empty;
+                        CurrentUser.Password = string.Empty;
                         RepeatPassword = string.Empty;
                         //return;
                         break;
@@ -126,7 +133,7 @@ namespace InstagroomEX.ViewModels
                 case PasswordValidationEnum.NotEqual:
                     {
                         await UserDialogs.Instance.AlertAsync(_validationService.RemarkPasswordNotEqual, "Error", "OK");
-                        Password = string.Empty;
+                        CurrentUser.Password = string.Empty;
                         RepeatPassword = string.Empty;
                         //return;
                         break;
@@ -146,6 +153,7 @@ namespace InstagroomEX.ViewModels
         {
             _validationService = validationService;
             _userDataService = userDataService;
+            CurrentUser = new UserDto();
         }
     }
 }

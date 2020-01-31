@@ -14,11 +14,12 @@ namespace InstagroomEX.Services
         private SQLiteAsyncConnection _dbConnection;
         public UserDto CurrentUser { get; set; }
 
-        public async Task<bool> AddUserAsync(User newUser)
+        public async Task<bool> AddUserAsync(UserDto newUser)
         {
+            var user = newUser.ToUser();
             try
             {
-                await _dbConnection.InsertAsync(newUser);
+                await _dbConnection.InsertAsync(user);
                 return true;
             }
             catch (Exception ex)
@@ -62,15 +63,15 @@ namespace InstagroomEX.Services
 
         }
 
-        public async Task<User> GetUserByGoogleIDAsync(string googleId)
+        public async Task<UserDto> GetUserByGoogleIDAsync(string googleId)
         {
-            return await _dbConnection.GetAsync<User>(u => (u.GoogleID == googleId));
+            return (await _dbConnection.GetAsync<User>(u => (u.GoogleID == googleId))).ToUserDto();
         }
 
-        public string GetUserFullName(UserDto user)
-        {
-            return user.FirstName + " " + user.LastName;
-        }
+        //public string GetUserFullName(UserDto user)
+        //{
+        //    return user.FirstName + " " + user.LastName;
+        //}
 
         public UserDataService(ISQLiteConnectionService connectionService)
         {

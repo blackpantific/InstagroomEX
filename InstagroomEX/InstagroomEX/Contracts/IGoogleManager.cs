@@ -7,7 +7,7 @@ namespace InstagroomEX.Contracts
 {
     public interface IGoogleManager
     {
-        void Login(Action<User, string> OnLoginComplete);
+        void Login(Action<UserDto, string> OnLoginComplete);
         void Logout();
         void OnAuthCompleted(object result);
     }

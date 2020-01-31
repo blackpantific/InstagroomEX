@@ -30,5 +30,8 @@ namespace InstagroomEX.Model
 
         [MaxLength(255)]
         public string UserAvatar { get; set; }
+
+        [MaxLength(255)]
+        public string ImagePath { get; set; }
     }
 }

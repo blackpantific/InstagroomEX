@@ -90,7 +90,7 @@ namespace InstagroomEX.ViewModels
             _googleManager.Login(OnLoginComplete);
         }
 
-        private async void OnLoginComplete(User googleUser, string message)
+        private async void OnLoginComplete(UserDto googleUser, string message)
         {
             if(googleUser != null)
             {
@@ -98,7 +98,7 @@ namespace InstagroomEX.ViewModels
                 googleUser = await _userDataService.GetUserByGoogleIDAsync(googleUser.GoogleID);
 
 
-                _userDataService.CurrentUser = googleUser.ToUserDto();
+                _userDataService.CurrentUser = googleUser;
                 SettingsHelper.UserId = googleUser.ID;
 
                 UserDialogs.Instance.Toast(_validationService.RemarkRegistrationCompletedSuccessfully);

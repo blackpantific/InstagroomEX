@@ -20,15 +20,16 @@ namespace InstagroomEX.Droid.Services
 {
     public class GoogleManagerService : Java.Lang.Object, IGoogleManager, GoogleApiClient.IConnectionCallbacks, GoogleApiClient.IOnConnectionFailedListener
     {
-        public Action<User, string> _onLoginComplete;  //в случае ошибки попробовать паблик и в свойстве ниже тоже
+        public Action<UserDto, string> _onLoginComplete;  //в случае ошибки попробовать паблик и в свойстве ниже тоже
 
         public static GoogleApiClient _googleApiClient;
+        public UserDto CurrentUser { get; set; }
 
         public static GoogleManagerService Instance { get; private set; }
 
 
 
-        public void Login(Action<User, string> OnLoginComplete)
+        public void Login(Action<UserDto, string> OnLoginComplete)
         {
             _onLoginComplete = OnLoginComplete;
             Intent signInIntent = Auth.GoogleSignInApi.GetSignInIntent(_googleApiClient);
@@ -46,16 +47,7 @@ namespace InstagroomEX.Droid.Services
             if (((GoogleSignInResult)result).IsSuccess)
             {
                 GoogleSignInAccount account = ((GoogleSignInResult)result).SignInAccount;
-                _onLoginComplete?.Invoke(new User
-                {
-                    GoogleID = account.Id,
-                    Username = account.Email,
-                    FirstName = account.GivenName,
-                    LastName = account.FamilyName,
-                    Email = account.Email,
-                    Password = string.Empty
-
-                }, string.Empty);
+                _onLoginComplete?.Invoke(CurrentUser, string.Empty);
             }
             else
             {
@@ -82,6 +74,8 @@ namespace InstagroomEX.Droid.Services
         public GoogleManagerService()
         {
             Instance = this;
+
+            CurrentUser = new UserDto();
 
             GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DefaultSignIn)
                 //.RequestIdToken("674374288476-paqqdnstn17dii7n81okj06l0r417vgv.apps.googleusercontent.com")

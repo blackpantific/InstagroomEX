@@ -18,7 +18,8 @@ namespace InstagroomEX.Mapper
                 LastName = dto.LastName,
                 Password = dto.Password,
                 UserAvatar = dto.UserAvatar,
-                Username = dto.Username
+                Username = dto.Username,
+                ImagePath = dto.ImagePath
             };
 
             return user;
@@ -35,7 +36,8 @@ namespace InstagroomEX.Mapper
                 LastName = dto.LastName,
                 Password = dto.Password,
                 UserAvatar = dto.UserAvatar,
-                Username = dto.Username
+                Username = dto.Username,
+                ImagePath = dto.ImagePath
             };
 
             return userDto;
