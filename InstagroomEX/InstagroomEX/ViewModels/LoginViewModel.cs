@@ -1,6 +1,7 @@
 ﻿using Acr.UserDialogs;
 using InstagroomEX.Contracts;
 using InstagroomEX.Helpers;
+using InstagroomEX.Mapper;
 using InstagroomEX.Model;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -89,7 +90,7 @@ namespace InstagroomEX.ViewModels
             _googleManager.Login(OnLoginComplete);
         }
 
-        private async void OnLoginComplete(User googleUser, string message)
+        private async void OnLoginComplete(UserDto googleUser, string message)
         {
             if(googleUser != null)
             {

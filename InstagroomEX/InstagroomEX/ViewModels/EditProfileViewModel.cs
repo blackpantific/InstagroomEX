@@ -22,8 +22,26 @@ namespace InstagroomEX.ViewModels
         private string _currentPassword;
         private string _newPassword;
         private string _username;
+        private string _firstName;
+        private string _lastName;
+        private string _previewImagePath;
 
-        #region
+        #region Properties
+        public string PreviewImagePath
+        {
+            get { return _previewImagePath; }
+            set { SetProperty(ref _previewImagePath, value); }
+        }
+        public string LastName
+        {
+            get { return _lastName; }
+            set { SetProperty(ref _lastName, value); }
+        }
+        public string FirstName
+        {
+            get { return _firstName; }
+            set { SetProperty(ref _firstName, value); }
+        }
         public string Username
         {
             get { return _username; }
@@ -45,13 +63,7 @@ namespace InstagroomEX.ViewModels
             set { SetProperty(ref _email, value); }
         }
         #endregion
-
-        private string _previewImagePath;
-        public string PreviewImagePath
-        {
-            get { return _previewImagePath; }
-            set { SetProperty(ref _previewImagePath, value); }
-        }
+        
 
         private DelegateCommand _saveChanges;
         public DelegateCommand SaveChanges =>
@@ -75,6 +87,30 @@ namespace InstagroomEX.ViewModels
                 {
                     //проверка имейл
                     _userDataService.CurrentUser.Email = this.Email;
+                }
+            }
+            if (!String.IsNullOrEmpty(FirstName))
+            {
+                if (_userDataService.CurrentUser.FirstName.Equals(FirstName))
+                {
+                    UserDialogs.Instance.Toast("FirstName match");
+                    return;
+                }
+                else
+                {
+                    _userDataService.CurrentUser.FirstName = this.FirstName;
+                }
+            }
+            if (!String.IsNullOrEmpty(LastName))
+            {
+                if (_userDataService.CurrentUser.FirstName.Equals(LastName))
+                {
+                    UserDialogs.Instance.Toast("LastName match");
+                    return;
+                }
+                else
+                {
+                    _userDataService.CurrentUser.LastName = this.LastName;
                 }
             }
             if (!String.IsNullOrEmpty(Username))
@@ -110,8 +146,28 @@ namespace InstagroomEX.ViewModels
                     }
                 }
             }
+            if (!String.IsNullOrEmpty(PreviewImagePath))
+            {
+                if (_userDataService.CurrentUser.ImagePath.Equals(PreviewImagePath))
+                {
+                    UserDialogs.Instance.Toast("FirstName match");
+                    return;
+                }
+                else
+                {
+                    _userDataService.CurrentUser.ImagePath = this.PreviewImagePath;
+                }
+            }
 
             _userDataService.UpdateUserAsync(_userDataService.CurrentUser);//cause my team lead said so
+
+            LastName = String.Empty;
+            Email = String.Empty;
+            FirstName = String.Empty;
+            Username = String.Empty;
+            CurrentPassword = String.Empty;
+            NewPassword = String.Empty;
+            PreviewImagePath = String.Empty;
         }
 
         public DelegateCommand OpenGallery =>

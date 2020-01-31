@@ -44,7 +44,7 @@
                             VerticalOptions="Center"
                             Aspect="AspectFill"
                             Margin="8,8,0,8"
-                            Source="Huayra3.jpg"
+                            Source="{Binding CurrentUser.ImagePath, Mode=OneWay}"
                             >
                 <ff:CachedImage.Transformations>
                     <ffTransformations:RoundedTransformation Radius="400"/>
@@ -56,12 +56,13 @@
 
             <Label Grid.Row="0"
                    Grid.Column="1"
-                   Text="{Binding FullName, Mode=OneWay}"
+                   Text="{Binding CurrentUser.FullName, Mode=OneWay}"
                    LineBreakMode="TailTruncation"
                    FontSize="20"/>
             <Label Grid.Row="1"
                    Grid.Column="1"
-                   Text="{Binding Username, Mode=OneWay}"
+                   Text="{Binding CurrentUser.Username, Mode=OneWay,
+                    StringFormat='@{0}'}"
                    LineBreakMode="TailTruncation"
                    FontSize="16"/>
 
@@ -117,12 +118,47 @@
         </Grid>
 
 
-        <Label Text="You haven't posted anything yet"
+        <!--<Label Text="You haven't posted anything yet"
                Grid.Row="1"
                HorizontalOptions="Center"
                VerticalOptions="Center"
-               IsVisible="True"/>
+               IsVisible="True"/>-->
         
+        <RefreshView Grid.Row="1"
+                     IsRefreshing="{Binding IsRefreshing}"
+                     Command="{Binding RefreshCommand}">
+            <CollectionView ItemsSource="{Binding Images}"
+                            RemainingItemsThreshold="3"
+                            RemainingItemsThresholdReachedCommand="{Binding UpdateImagesCommand}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                                 Span="3"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                    <ff:CachedImage 
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Aspect="AspectFill"
+                        Source="{Binding Source, Mode=OneWay}">
+                        <ff:CachedImage.Transformations>
+                                <ffTransformations:CropTransformation />
+                            </ff:CachedImage.Transformations>
+                    </ff:CachedImage>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        </RefreshView>
 
     </Grid>
 </ContentPage>

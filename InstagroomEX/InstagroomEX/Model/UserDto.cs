@@ -15,8 +15,18 @@ namespace InstagroomEX.Model
         private string _password;
         private string _email;
         private string _userAvatar;
+        private string _imagePath;
+        public string FullName
+        {
+            get { return $"{FirstName} {LastName}"; }
+        }
 
         #region Properties
+        public string ImagePath
+        {
+            get { return _imagePath; }
+            set { SetProperty(ref _imagePath, value); }
+        }
         public string UserAvatar
         {
             get { return _userAvatar; }
@@ -35,12 +45,20 @@ namespace InstagroomEX.Model
         public string LastName
         {
             get { return _lastName; }
-            set { SetProperty(ref _lastName, value); }
+            set 
+            {
+                SetProperty(ref _lastName, value);
+                RaisePropertyChanged(nameof(FullName));
+            }
         }
         public string FirstName
         {
             get { return _firstName; }
-            set { SetProperty(ref _firstName, value); }
+            set 
+            { 
+                SetProperty(ref _firstName, value);
+                RaisePropertyChanged(nameof(FullName));
+            }
         }
         public string Username
         {

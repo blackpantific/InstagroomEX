@@ -19,20 +19,20 @@
             Grid.Row="0">
             <Entry x:Name="Username" 
                    Placeholder="Username"
-                   Text="{Binding Username, Mode=TwoWay}"/>
+                   Text="{Binding CurrentUser.Username, Mode=TwoWay}"/>
             <Entry x:Name="FirstName"
                    Placeholder="First name"
-                   Text="{Binding FirstName, Mode=TwoWay}"/>
+                   Text="{Binding CurrentUser.FirstName, Mode=TwoWay}"/>
             <Entry x:Name="LastName" 
                    Placeholder="Last name"
-                   Text="{Binding LastName, Mode=TwoWay}"/>
+                   Text="{Binding CurrentUser.LastName, Mode=TwoWay}"/>
             <Entry x:Name="Email" 
                    Placeholder="Email"
-                   Text="{Binding Email, Mode=TwoWay}"/>
+                   Text="{Binding CurrentUser.Email, Mode=TwoWay}"/>
             <Entry x:Name="Password" 
                    IsPassword="True"
                    Placeholder="Password"
-                   Text="{Binding Password, Mode=TwoWay}"/>
+                   Text="{Binding CurrentUser.Password, Mode=TwoWay}"/>
             <Entry x:Name="RepeatPassword" 
                    IsPassword="True"
                    Placeholder="Repeat password"

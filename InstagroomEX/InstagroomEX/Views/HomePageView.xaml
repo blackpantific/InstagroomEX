@@ -26,8 +26,9 @@
                HorizontalTextAlignment="Center"
                />
 
-        <BoxView BackgroundColor="Red" Grid.Row="0"
-                 HeightRequest="50"/>
+        <BoxView BackgroundColor="Red" 
+                 Grid.Row="0"
+                 HeightRequest="60"/>
 
     </Grid>
 </ContentPage>
