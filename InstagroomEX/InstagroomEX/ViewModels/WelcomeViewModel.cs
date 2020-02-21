@@ -64,6 +64,8 @@ namespace InstagroomEX.ViewModels
                 {
                     _userDataService.CurrentUser = currentUser;
                     await NavigationService.NavigateAsync("/NavigationPage/MasterTabbedPageView");
+                    //await NavigationService.NavigateAsync("/NavigationPage/MasterTabbedPageView?selectedTab=AccountPageView");
+
                 }
             }
             //проверкаfffffffffffffffffdfgjghjkl

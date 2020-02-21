@@ -2,21 +2,96 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:controls="clr-namespace:InstagroomEX.Controls"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:ffTransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="InstagroomEX.Views.SearchPageView"
              Title="Search"
-             BackgroundColor="Red"
+             BackgroundColor="CadetBlue"
              NavigationPage.HasNavigationBar="False">
-    <!--В случае ненадобности удалить свойство HasNavigationBar-->
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
 
-        <Entry Grid.Row="0"
-               Placeholder="Search people..."
-               Text="{Binding Username, Mode=TwoWay}"/>
-    </Grid>
+    <ContentPage.Resources>
+        <DataTemplate x:Key="AdvancedTemplate">
+            <StackLayout>
+                <Label Text="No results matched your filter."
+                       Margin="10,25,10,10"
+                       FontAttributes="Bold"
+                       FontSize="18"
+                       HorizontalOptions="Fill"
+                       HorizontalTextAlignment="Center" />
+                <Label Text="Try a broader filter?"
+                       FontAttributes="Italic"
+                       FontSize="12"
+                       HorizontalOptions="Fill"
+                       HorizontalTextAlignment="Center" />
+            </StackLayout>
+        </DataTemplate>
+
+        <DataTemplate x:Key="BasicTemplate">
+            <Label Text="No items to display."
+                   Margin="10,25,10,10"
+                   FontAttributes="Bold"
+                   FontSize="18"
+                   HorizontalOptions="Fill"
+                   HorizontalTextAlignment="Center" />
+        </DataTemplate>
+
+        <controls:SearchTermDataTemplateSelector x:Key="SearchSelector"
+                                                 DefaultTemplate="{StaticResource AdvancedTemplate}"
+                                                 OtherTemplate="{StaticResource BasicTemplate}" />
+    </ContentPage.Resources>
+
+    <StackLayout>
+        <SearchBar x:Name="searchBar"
+                   SearchCommand="{Binding FilterCommand}"
+                   SearchCommandParameter="{Binding Source={x:Reference searchBar}, Path=Text}"
+                   Placeholder="Filter" />
+        <CollectionView ItemsSource="{Binding ListUsers, Mode=OneWay}"
+                        EmptyView="{Binding Source={x:Reference searchBar}, Path=Text}"
+                        EmptyViewTemplate="{StaticResource SearchSelector}"
+                        Margin="12,0,0,0">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="8"
+                                 Orientation="Vertical"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Horizontal"
+                                 Spacing="0">
+                        <ff:CachedImage Aspect="AspectFill"
+                                            Source="{Binding .}"
+                                            HeightRequest="60"
+                                            WidthRequest="60"
+                                            Margin="0,0,0,0"
+                                            MinimumHeightRequest="100"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center">
+                            <ff:CachedImage.Transformations>
+                                <ffTransformations:CircleTransformation/>
+                            </ff:CachedImage.Transformations>
+                        </ff:CachedImage>
+                        <Grid RowSpacing="0" ColumnSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label Text="username"
+                                   Grid.Row="0"
+                                   VerticalOptions="End"
+                                   Margin="8,0,0,-2"
+                                   FontSize="18"/>
+                            <Label Text="Name + Second Name"
+                                   Grid.Row="1"
+                                   FontFamily="{StaticResource Key=HelveticaScript}"
+                                   VerticalOptions="Start"
+                                   Margin="8,-2,0,0"
+                                   FontSize="18"/>
+                        </Grid>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
 
 </ContentPage>

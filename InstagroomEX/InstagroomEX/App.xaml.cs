@@ -47,6 +47,7 @@ namespace InstagroomEX
             containerRegistry.RegisterForNavigation<NotificationPageView, NotificationPageViewModel>();
             containerRegistry.RegisterForNavigation<AccountPageView, AccountPageViewModel>();
             containerRegistry.RegisterForNavigation<EditProfileView, EditProfileViewModel>();
+            containerRegistry.RegisterForNavigation<CommentPageView, CommentPageViewModel>();
         }
     }
 }

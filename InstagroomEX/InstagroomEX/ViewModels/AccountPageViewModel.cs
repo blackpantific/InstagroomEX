@@ -1,26 +1,37 @@
-﻿using InstagroomEX.Contracts;
+﻿using FFImageLoading.Forms;
+using InstagroomEX.Contracts;
 using InstagroomEX.Helpers;
 using InstagroomEX.Model;
+using Prism;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Xamarin.Forms;
 
 namespace InstagroomEX.ViewModels
 {
-    public class AccountPageViewModel : ViewModelBase
+    public class AccountPageViewModel : ViewModelBase, IActiveAware
     {
         private IUserDataService _userDataService;
 
+        public ObservableCollection<Image> Images { get; set; } = new ObservableCollection<Image>();//it should be propp
 
-        private List<Image> _images;
-        public List<Image> Images
+        private string _buttonColor;
+        public string ButtonColor
         {
-            get { return _images; }
-            set { SetProperty(ref _images, value); }
+            get { return _buttonColor; }
+            set { SetProperty(ref _buttonColor, value); }
+        }
+
+        private string _buttonText;
+        public string ButtonText
+        {
+            get { return _buttonText; }
+            set { SetProperty(ref _buttonText, value); }
         }
 
 
@@ -38,62 +49,21 @@ namespace InstagroomEX.ViewModels
             set { SetProperty(ref _currentUser, value); }
         }
 
-        //private string _fullName;
-        //private string _posts;
-        //private string _followers;
-        //private string _following;
-        //private string _username;
-
-        //#region Properties
-        //public string Following
-        //{
-        //    get { return _following; }
-        //    set { SetProperty(ref _following, value); }
-        //}
-        //public string Followers
-        //{
-        //    get { return _followers; }
-        //    set { SetProperty(ref _followers, value); }
-        //}
-        //public string Posts
-        //{
-        //    get { return _posts; }
-        //    set { SetProperty(ref _posts, value); }
-        //}
-        //public string FullName
-        //{
-        //    get { return _fullName; }
-        //    set { SetProperty(ref _fullName, value); }
-        //}        
-        //public string Username
-        //{
-        //    get { return _username; }
-        //    set { SetProperty(ref _username, value); }
-        //}
-        //#endregion
-
         private DelegateCommand _refreshCommand;
         public DelegateCommand RefreshCommand =>
             _refreshCommand ?? (_refreshCommand = new DelegateCommand(ExecuteRefreshCommand));
 
-        private DelegateCommand _updateImagesCommand;
-        public DelegateCommand UpdateImagesCommand =>
-            _updateImagesCommand ?? (_updateImagesCommand = new DelegateCommand(ExecuteUpdateImagesCommand));
+        //private DelegateCommand _updateImagesCommand;
+        //public DelegateCommand UpdateImagesCommand =>
+        //    _updateImagesCommand ?? (_updateImagesCommand = new DelegateCommand(ExecuteUpdateImagesCommand));
 
-        void ExecuteUpdateImagesCommand()
-        {
-            Image im = new Image();
-            im.Source = "Huayra3.jpg";
-            Image im7 = new Image();
-            im7.Source = "Huayra1.jpg";
-            
-            Images.Add(im7);
-            Images.Add(im7);
-            Images.Add(im);
-            Images.Add(im);
-            Images.Add(im);
-            Images.Add(im);
-        }
+        //void ExecuteUpdateImagesCommand()
+        //{
+        //    if (IsActive)
+        //    {
+
+        //    }
+        //}
 
 
         void ExecuteRefreshCommand()
@@ -117,6 +87,37 @@ namespace InstagroomEX.ViewModels
         public DelegateCommand EditProfileCommand =>
             _editProfileComand ?? (_editProfileComand = new DelegateCommand(ExecuteEditProfileCommand));
 
+        public event EventHandler IsActiveChanged;
+
+        private string _selectedItem;
+        public string SelectedItem
+        {
+            get { return _selectedItem; }
+            set { SetProperty(ref _selectedItem, value); }
+        }
+
+        private DelegateCommand _photoListSelectionChangeCommand;
+        public DelegateCommand PhotoListSelectionChangeCommand =>
+            _photoListSelectionChangeCommand ?? (_photoListSelectionChangeCommand = new DelegateCommand(ExecutePhotoListSelectionChangeCommand));
+
+        void ExecutePhotoListSelectionChangeCommand()
+        {
+            var a = SelectedItem;
+        }
+
+
+        private bool _isActive;
+        public bool IsActive
+        {
+            get { return _isActive; }
+            set { SetProperty(ref _isActive, value, RaiseIsActiveChanged); }
+        }
+
+        protected virtual void RaiseIsActiveChanged()
+        {
+            IsActiveChanged?.Invoke(this, EventArgs.Empty);
+        }
+
         async void ExecuteEditProfileCommand()
         {
             await NavigationService.NavigateAsync("/NavigationPage/MasterTabbedPageView?selectedTab=AccountPageView/EditProfileView");
@@ -133,44 +134,18 @@ namespace InstagroomEX.ViewModels
                 this.CurrentUser.ImagePath = "user_avatar.jpg";     
             }
 
-            Images = new List<Image>();
 
-            Image im = new Image();
-            im.Source = "Huayra3.jpg";
-            Images.Add(im);
-            Image im1 = new Image();
-            im1.Source = "Huayra1.jpg";
-            Images.Add(im1);
-            Image im2 = new Image();
-            im2.Source = "Huayra4.jpg";
-            Images.Add(im2);
-            Image im3 = new Image();
-            im3.Source = "Huayra3.jpg";
-            Images.Add(im3);
-            Image im4 = new Image();
-            im4.Source = "Huayra1.jpg";
-            Images.Add(im4);
-            Image im5 = new Image();
-            im5.Source = "Huayra4.jpg";
-            Images.Add(im5);
-            Image im6 = new Image();
-            im6.Source = "Huayra3.jpg";
-            Images.Add(im6);
-            Image im7 = new Image();
-            im7.Source = "Huayra1.jpg";
-            Images.Add(im7);
-            Images.Add(im7);
-            Images.Add(im7);
-            Images.Add(im7);
-            Images.Add(im7);
-            Images.Add(im7);
-            Images.Add(im7);
-            Images.Add(im);
+            Image image = new Image() { Source = "Huayra3.jpg" };
 
+            Image image1 = new Image() { Source = "Huayra4.jpg" };
 
-            //Images.Add(im);
-            //Images.Add(im);
+            Image image2 = new Image() { Source = "Huayra2.jpg" };
 
+            Images.Add(image);
+            Images.Add(image1);
+            Images.Add(image2);
+
+            ButtonText = "Edit profile";
         }
     }
 }

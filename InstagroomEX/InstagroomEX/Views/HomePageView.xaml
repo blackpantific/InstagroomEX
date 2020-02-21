@@ -2,33 +2,213 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:ffTransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:controls="clr-namespace:InstagroomEX.Controls"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="InstagroomEX.Views.HomePageView"
              Title="Home"
              BackgroundColor="ForestGreen"
-             NavigationPage.HasNavigationBar="False">
-    <!--В случае ненадобности удалить свойство HasNavigationBar-->
-    
-    <Grid >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <!--<Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>-->
+             NavigationPage.HasNavigationBar="False"
+             x:Name="root">
 
-        <Label Text="{Binding Label, Mode=OneWay}"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"
-               Grid.RowSpan="2"
-               LineBreakMode="WordWrap"
-               HorizontalTextAlignment="Center"
-               />
+    <StackLayout>
+        <CollectionView ItemsSource="{Binding Images}">
+            <CollectionView.Header>
+                <StackLayout Orientation="Vertical">
+                    <CollectionView ItemsSource="{Binding Source={x:Reference root}, Path=BindingContext.ImagesPath}"
+                            HeightRequest="80"
+                            Margin="4,0,0,0"
+                            EmptyView="There is no stories from users you subscribe">
+                        <CollectionView.Header>
+                            <Grid HeightRequest="80"
+                                  WidthRequest="80">
 
-        <BoxView BackgroundColor="Red" 
-                 Grid.Row="0"
-                 HeightRequest="60"/>
+                                <controls:SquareImage Source="{Binding Source={x:Reference root}, Path=BindingContext.UserAvatarPath,
+                                    Mode=OneWay}"
+                                                      Aspect="AspectFill"
+                                                      Margin="8,8,8, 8">
+                                    <controls:SquareImage.Transformations>
+                                        <ffTransformations:CircleTransformation />
+                                    </controls:SquareImage.Transformations>
+                                </controls:SquareImage>
+                                <controls:SquareImage Source="AddPlus.jpg"
+                                                      HorizontalOptions="End"
+                                                      VerticalOptions="End"
+                                                      HeightRequest="16"
+                                                      WidthRequest="16"
+                                                      Margin="0,0,8,8">
+                                    <ff:CachedImage.Transformations>
+                                        <ffTransformations:RoundedTransformation Radius="1000"/>
+                                    </ff:CachedImage.Transformations>
+                                </controls:SquareImage>
+                            </Grid>
+                        </CollectionView.Header>
 
-    </Grid>
+
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal"
+                                           ItemSpacing="0" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid HeightRequest="80"
+                                  WidthRequest="80">
+
+                                    <controls:SquareImage Source="{Binding .}"
+                                                      Aspect="AspectFill"
+                                                      Margin="8, 8">
+                                        <controls:SquareImage.Transformations>
+                                            <ffTransformations:CircleTransformation BorderSize="16" BorderHexColor="#e300b9"/>
+                                        </controls:SquareImage.Transformations>
+                                    </controls:SquareImage>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                        <!--<CollectionView.EmptyView>
+                            -->
+                        <!--<Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0"
+                               Grid.Column="0"
+                            Text="There is no stories from users you subscribe"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"/>
+                            </Grid>-->
+                        <!--
+                            <Label Text="edfghtetsghtrdfhg"/>
+
+                        </CollectionView.EmptyView>-->
+
+                    </CollectionView>
+                    <BoxView BackgroundColor="#524b50" HeightRequest="1"/>
+                </StackLayout>
+
+            </CollectionView.Header>
+
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="8"
+                                 Orientation="Vertical"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Vertical">
+                        <StackLayout Orientation="Horizontal">
+                            <ff:CachedImage Aspect="AspectFill"
+                                            Source="{Binding Source, Mode=OneWay}"
+                                            HeightRequest="40"
+                                            WidthRequest="40"
+                                            Margin="12,0,0,0"
+                                            
+>
+                                <ff:CachedImage.Transformations>
+                                    <ffTransformations:CircleTransformation/>
+                                </ff:CachedImage.Transformations>
+                            </ff:CachedImage>
+
+                            <Label Text="Username" 
+                                   FontSize="18"
+                                   VerticalOptions="Center"/>
+
+                        </StackLayout>
+                        <ff:CachedImage Aspect="AspectFill"                                        
+                                        Source="{Binding Source, Mode=OneWay}"/>
+                        <StackLayout Orientation="Horizontal">
+                            <ff:CachedImage Aspect="AspectFill"
+                                            Source="Like.png"
+                                            HeightRequest="36"
+                                            WidthRequest="40"
+                                            Margin="12,0,0,0"
+                                            MinimumHeightRequest="100">
+                                <ff:CachedImage.Transformations>
+                                    <ffTransformations:CropTransformation/>
+                                </ff:CachedImage.Transformations>
+                            </ff:CachedImage>
+                            <ff:CachedImage Aspect="AspectFill"
+                                            Source="comment.png"
+                                            HeightRequest="40"
+                                            WidthRequest="40"
+                                            Margin="0,0,0,0"
+                                            MinimumHeightRequest="100">
+                                <ff:CachedImage.Transformations>
+                                    <ffTransformations:CropTransformation/>
+                                </ff:CachedImage.Transformations>
+                                <ff:CachedImage.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference root},
+                                        Path=BindingContext.CommentFFImageButtonCommand}"/>
+                                </ff:CachedImage.GestureRecognizers>
+                            </ff:CachedImage>
+                        </StackLayout>
+                        <Label Text="Понравилось: M"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               Margin="12,0,0,0"/>
+                        <Label LineBreakMode="WordWrap"
+                               BackgroundColor="Aquamarine"
+                               HorizontalTextAlignment="Start"
+                               Margin="12,0,12,0">
+                            <Label.FormattedText >
+                                <FormattedString>
+                                    <Span Text="username: "
+                                          FontSize="16"
+                                          FontAttributes="Bold">
+                                    </Span>
+                                    <Span
+                                        Text="{Binding Source={x:Reference root}, Path=BindingContext.PostUserDescription, 
+                                        Mode=OneWay}"
+                                        FontSize="16"/>
+                                    <Span Text="{Binding Source={x:Reference root}, Path=BindingContext.LoadMoreUserDescription, 
+                                        Mode=OneWay}"
+                                          FontSize="16"
+                                          TextColor="Red">
+                                        <Span.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference root}, Mode=OneWay, Path=BindingContext.LoadMoreUserDescriptionCommand}" />
+                                        </Span.GestureRecognizers>
+                                    </Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label Text="{Binding Source={x:Reference root}, Path=BindingContext.NumberOfComments, 
+                                        Mode=OneWay}"
+                                HorizontalOptions="Start"
+                                VerticalOptions="Center"
+                                FontSize="16"
+                                TextColor="Red"
+                                Margin="12,0,0,0"
+                               FontFamily="{StaticResource Key=HelveticaScript}"/>
+                        <Label Text="{Binding Source={x:Reference root}, Path=BindingContext.HoursAgo, 
+                                        Mode=OneWay}"
+                               FontSize="12"
+                               Margin="12,0,0,12"
+                               FontFamily="{StaticResource Key=HelveticaScript}"/>
+
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.EmptyView>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0"
+                           Grid.Column="0"
+                           Text="Posts from people you're following will appear here"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+                </Grid>
+
+            </CollectionView.EmptyView>
+        </CollectionView>
+    </StackLayout>
+
 </ContentPage>

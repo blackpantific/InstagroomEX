@@ -7,5 +7,9 @@
 
 		<!-- Application resource dictionary -->
 
+        <OnPlatform x:TypeArguments="x:String" x:Key="HelveticaScript">
+            <On Platform="Android" Value="HelveticaLight.otf#Helvetica Light"/>
+        </OnPlatform>
+
 	</Application.Resources>
 </prism:PrismApplication>

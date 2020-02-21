@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:controls="clr-namespace:InstagroomEX.Controls"
+             xmlns:ffTransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="InstagroomEX.Views.CommentPageView"
+             NavigationPage.HasNavigationBar="False"
+             x:Name="root1">
+
+    
+        <StackLayout Orientation="Vertical"
+                     BackgroundColor="Aqua"
+                     Spacing="0">
+        <Grid BackgroundColor="Aquamarine"
+              RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <ff:CachedImage Aspect="AspectFill"
+                            Source="Huayra2.jpg"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            HeightRequest="40"
+                            WidthRequest="40"
+                            Margin="8,0,0,0"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center">
+                <ff:CachedImage.Transformations>
+                    <ffTransformations:CircleTransformation/>
+                </ff:CachedImage.Transformations>
+            </ff:CachedImage>
+            <Editor Placeholder="Add a comment..."
+                MaxLength="150"
+                
+                AutoSize="TextChanges"
+                Grid.Row="0"
+                Grid.Column="1"
+                VerticalOptions="Center">
+            </Editor>
+            <Button Text="post"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    HeightRequest="40"
+                    WidthRequest="88"
+                    FontSize="12">
+
+            </Button>
+
+        </Grid>
+
+        <CollectionView  ItemsSource="{Binding SomeUserComment}">
+            <CollectionView.Header>
+                <StackLayout Orientation="Vertical">
+                    <Grid IsVisible="True">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <ff:CachedImage Aspect="AspectFill"
+                            Source="Huayra2.jpg"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            HeightRequest="40"
+                            WidthRequest="40"
+                            Margin="8,8,0,0"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Start">
+                            <ff:CachedImage.Transformations>
+                                <ffTransformations:CircleTransformation/>
+                            </ff:CachedImage.Transformations>
+                        </ff:CachedImage>
+
+                        <Label LineBreakMode="WordWrap"
+                               BackgroundColor="Aquamarine"
+                               HorizontalTextAlignment="Start"
+                               Margin="8,0,12,0"
+                               Grid.Row="0"
+                               Grid.Column="1">
+                            <Label.FormattedText >
+                                <FormattedString>
+                                    <Span Text="username: "
+                                          FontSize="16"
+                                          FontAttributes="Bold">
+                                    </Span>
+                                    <Span
+                                        Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                                        FontSize="16"/>
+
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+
+                    </Grid>
+                    <BoxView BackgroundColor="#524b50" HeightRequest="1"
+                             IsVisible="True"/>
+                </StackLayout>
+
+            </CollectionView.Header>
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="16"
+                                 Orientation="Vertical"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <ff:CachedImage Aspect="AspectFill"
+                            Source="Huayra2.jpg"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            HeightRequest="40"
+                            WidthRequest="40"
+                            Margin="8,0,0,0"
+                            HorizontalOptions="End"
+                            VerticalOptions="Start">
+                            <ff:CachedImage.Transformations>
+                                <ffTransformations:CircleTransformation/>
+                            </ff:CachedImage.Transformations>
+                        </ff:CachedImage>
+
+                        <Label LineBreakMode="WordWrap"
+                               BackgroundColor="Aquamarine"
+                               HorizontalTextAlignment="Start"
+                               Margin="12,8,12,0"
+                               Grid.Column="1"
+                               Grid.Row="0">
+                            <Label.FormattedText >
+                                <FormattedString>
+                                    <Span Text="username: "
+                                          FontSize="16"
+                                          FontAttributes="Bold">
+                                    </Span>
+                                    <Span
+                                        Text="{Binding .}"
+                                        FontSize="16"/>
+
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+
+</ContentPage>
